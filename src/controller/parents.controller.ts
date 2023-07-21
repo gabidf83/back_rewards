@@ -47,7 +47,7 @@ export class ParentsController {
         try {
             const parentsData = await this.parentsService.getAllParents();
             return response.status(HttpStatus.OK).json({
-                message: 'All parents data found successfully', parentsData,
+                parentsData,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);

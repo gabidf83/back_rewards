@@ -16,7 +16,7 @@ export class RewardsController {
         try{
             const newRewards = await this.rewardsService.createRewards(createRewardsDto);
             return response.status(HttpStatus.CREATED).json({
-                message: 'Rewards has been created successfully', newRewards
+                newRewards
             });
         } catch (err) {
             return response.status(HttpStatus.BAD_REQUEST).json({

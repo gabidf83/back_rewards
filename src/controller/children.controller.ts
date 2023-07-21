@@ -16,7 +16,7 @@ export class ChildrenController {
         try{
             const newChildren = await this.childrenService.createChildren(createChildrenDto);
             return response.status(HttpStatus.CREATED).json({
-                message: 'Children has been created succesfully', newChildren,
+                newChildren,
             });
         } catch(err) {
             return response.status(HttpStatus.BAD_REQUEST).json({

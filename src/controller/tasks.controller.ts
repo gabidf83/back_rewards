@@ -16,7 +16,6 @@ export class TasksController {
         try {
             const newTasks = await this.tasksService.createTasks(createTasksDto);
             return response.status(HttpStatus.CREATED).json({
-                message: 'Tasks has been created successfully',
                 newTasks,
             });
         } catch (err) {

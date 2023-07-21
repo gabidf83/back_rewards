@@ -35,7 +35,8 @@ import { TasksSchema } from './schema/tasks.schema';
         name: 'Rewards',
         schema: RewardsSchema
       }
-    ])
+    ]),
+
   ],
   controllers: [
         TasksController, 
