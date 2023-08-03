@@ -1,24 +1,21 @@
 import { IsNumber, IsNotEmpty, IsString, MaxLength, IsBoolean } from "class-validator";
 
 export class CreateRewardsDto {
-    @IsNumber()
-    @IsNotEmpty()
-    readonly id_rewards: number;
 
     @IsString()
     @MaxLength(30)
     @IsNotEmpty()
     readonly reward_rewards: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    readonly id_parents: number;
+    readonly id_parents: string;
 
     @IsNumber()
     @IsNotEmpty()
-    readonly id_children: number;
+    readonly id_children: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     readonly coins_rewards: number;
 

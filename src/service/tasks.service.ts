@@ -19,7 +19,7 @@ export class TasksService {
         return newTasks.save();
     }
 
-    async updateTasks(tasksId: number, updateTasksDto: UpdateTasksDto): Promise<ITasks> {
+    async updateTasks(tasksId: string, updateTasksDto: UpdateTasksDto): Promise<ITasks> {
         const existingTasks = await this.tasksModel.findByIdAndUpdate(tasksId, updateTasksDto, {
             new: true
         });
@@ -37,7 +37,12 @@ export class TasksService {
         return tasksData;
     }
 
-    async getTasks(tasksId: number): Promise<ITasks> {
+    async getAllByChildrenId(childId: string): Promise<ITasks[]> {
+        const tasksData = await this.tasksModel.find({ id_children: childId }).exec();
+        return tasksData;
+      }
+
+    async getTasks(tasksId: string): Promise<ITasks> {
         const existingTasks = await this.tasksModel.findById(tasksId).exec();
         if(!existingTasks) {
             throw new NotFoundException(`Tasks #${tasksId} not found`);
@@ -45,7 +50,7 @@ export class TasksService {
         return existingTasks;
     }
 
-    async deleteTasks(tasksId: number): Promise<ITasks> {
+    async deleteTasks(tasksId: string): Promise<ITasks> {
         const deletedTasks = await this.tasksModel.findByIdAndDelete(tasksId);
         if(!deletedTasks) {
             throw new NotFoundException(`Tasks #${tasksId} not found`);

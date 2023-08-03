@@ -3,8 +3,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema({collection: 'parents'})
 export class Parents {
-    @Prop()
-    id_parents: number;
+
     @Prop()
     username_parents: string;
     @Prop()
@@ -16,7 +15,7 @@ export class Parents {
     @Prop()
     date_of_birth_parents: string;
     @Prop()
-    id_children: Array<number>;
+    id_children: Array<string>;
     @Prop()
     email_parents: string;
 }

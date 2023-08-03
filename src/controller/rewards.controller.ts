@@ -27,11 +27,11 @@ export class RewardsController {
     }
 
     @Put('/:id')
-    async updateRewards(@Res() response, @Param('id') rewardsId: number, @Body() updateRewardsDto: UpdateRewardsDto) {
+    async updateRewards(@Res() response, @Param('id') rewardsId: string, @Body() updateRewardsDto: UpdateRewardsDto) {
         try {
             const existingRewards = await this.rewardsService.updateRewards(rewardsId, updateRewardsDto);
             return response.status(HttpStatus.OK).json({
-                message: 'Rewards has been successfully updated', existingRewards
+                existingRewards
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -43,7 +43,7 @@ export class RewardsController {
         try {
             const rewardsData = await this.rewardsService.getAllRewards();
             return response.status(HttpStatus.OK).json({
-                message: 'All rewards data found successfully', rewardsData
+                rewardsData
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -51,11 +51,11 @@ export class RewardsController {
     }
 
     @Get('/:id')
-    async getRewards(@Res() response, @Param('id') rewardsId: number) {
+    async getRewards(@Res() response, @Param('id') rewardsId: string) {
         try {
             const existingRewards = await this.rewardsService.getRewards(rewardsId);
             return response.status(HttpStatus.OK).json({
-                message: 'Rewards found successfully', existingRewards,
+                existingRewards,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -63,11 +63,11 @@ export class RewardsController {
     }
 
     @Delete('/:id')
-    async deleteRewards(@Res() response, @Param('id') rewardsId: number) {
+    async deleteRewards(@Res() response, @Param('id') rewardsId: string) {
         try {
             const deletedRewards = await this.rewardsService.deleteRewards(rewardsId);
             return response.status(HttpStatus.OK).json({
-                message: 'Rewards deleted successfully', deletedRewards,
+                deletedRewards,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);

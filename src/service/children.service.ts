@@ -19,7 +19,7 @@ export class ChildrenService {
         return newChildren.save();
     }
 
-    async updateChildren(childrenId: number, updateChildrenDto: UpdateChildrenDto): Promise<IChildren> {
+    async updateChildren(childrenId: string, updateChildrenDto: UpdateChildrenDto): Promise<IChildren> {
         const existingChildren = await this.childrenModel.findByIdAndUpdate(childrenId, updateChildrenDto, {new: true});
         if(!existingChildren){
             throw new NotFoundException(`Children #${childrenId} not found`);
@@ -35,7 +35,7 @@ export class ChildrenService {
         return childrenData;
     }
 
-    async getChildren(childrenId: number): Promise<IChildren> {
+    async getChildren(childrenId: string): Promise<IChildren> {
         const existingChildren = await this.childrenModel.findById(childrenId).exec();
         if(!existingChildren){
             throw new NotFoundException(`Children #${childrenId} not found`);
@@ -43,7 +43,7 @@ export class ChildrenService {
         return existingChildren;
     }
 
-    async deleteChildren(childrenId: number): Promise<IChildren> {
+    async deleteChildren(childrenId: string): Promise<IChildren> {
         const deletedChildren = await this.childrenModel.findByIdAndDelete(childrenId);
         if(!deletedChildren){
             throw new NotFoundException(`Children #${childrenId} not found`);

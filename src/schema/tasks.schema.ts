@@ -3,17 +3,15 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 @Schema({ collection: 'tasks' })
 export class Tasks {
 
-    @Prop()
-    id_tasks: number;
 
     @Prop()
     task_tasks: string;
 
     @Prop()
-    id_parents: number;
+    id_parents: string;
 
     @Prop()
-    id_children: number;
+    id_children: string;
 
     @Prop()
     active_tasks: boolean;

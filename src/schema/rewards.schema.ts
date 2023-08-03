@@ -3,14 +3,13 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema({ collection: 'rewards' })
 export class Rewards {
-    @Prop()
-    id_rewards: number;
+
     @Prop()
     reward_rewards: string;
     @Prop()
-    id_parents: number;
+    id_parents: string;
     @Prop()
-    id_children: number;
+    id_children: string;
     @Prop()
     coins_rewards: number;
     @Prop()

@@ -2,21 +2,17 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateTasksDto {
 
-    @IsNumber()
-    @IsNotEmpty()
-    readonly id_tasks: number;
-
     @IsString()
     @IsNotEmpty()
     readonly task_tasks: string;
 
     @IsNumber()
     @IsNotEmpty()
-    readonly id_parents: number;
+    readonly id_parents: string;
 
     @IsNumber()
     @IsNotEmpty()
-    readonly id_children: number;
+    readonly id_children: string;
 
     @IsBoolean()
     @IsNotEmpty()

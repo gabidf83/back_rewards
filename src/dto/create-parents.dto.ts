@@ -2,9 +2,6 @@ import { IsArray, IsDate, IsNotEmpty, IsNumber, IsString, MaxLength } from "clas
 
 
 export class CreateParentsDto {
-    @IsNumber()
-    @IsNotEmpty()
-    readonly id_parents: number;
 
     @IsString()
     @MaxLength(30)
@@ -32,7 +29,7 @@ export class CreateParentsDto {
 
     @IsArray()
     @IsNotEmpty()
-    readonly id_children: Array<number>;
+    readonly id_children: Array<string>;
 
     @IsString()
     @MaxLength(30)

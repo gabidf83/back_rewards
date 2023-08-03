@@ -16,7 +16,6 @@ export class ParentsController {
         try {
             const newParent = await this.parentsService.createParents(createParentsDto);
             return response.status(HttpStatus.CREATED).json({
-                message: 'Parent has been created successfully',
                 newParent,
             });
         } catch (err) {
@@ -29,12 +28,11 @@ export class ParentsController {
     }
 
     @Put('/:id')
-    async updateParents(@Res() response, @Param('id') parentsId: number,
+    async updateParents(@Res() response, @Param('id') parentsId: string,
         @Body() updateParentsDto: UpdateParentsDto) {
         try {
             const existingParents = await this.parentsService.updateParents(parentsId, updateParentsDto);
             return response.status(HttpStatus.OK).json({
-                message: 'Parent has been successfully updated',
                 existingParents,
             });
         } catch (err) {
@@ -55,12 +53,12 @@ export class ParentsController {
     }
 
     @Get('/:id')
-    async getParents(@Res() response, @Param('id') parentsId: number) {
+    async getParents(@Res() response, @Param('id') parentsId: string) {
         try {
             const existingParents = await
                 this.parentsService.getParents(parentsId);
             return response.status(HttpStatus.OK).json({
-                message: 'Parent found successfully', existingParents,
+                existingParents,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -68,11 +66,10 @@ export class ParentsController {
     }
 
     @Delete('/:id')
-    async deleteParents(@Res() response, @Param('id') parentsId: number) {
+    async deleteParents(@Res() response, @Param('id') parentsId: string) {
         try {
             const deletedParents = await this.parentsService.deleteParents(parentsId);
             return response.status(HttpStatus.OK).json({
-                message: 'Parent deleted successfully',
                 deletedParents,
             });
         } catch (err) {

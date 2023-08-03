@@ -18,7 +18,7 @@ export class RewardsService {
         return newRewards.save();
     }
 
-    async updateRewards(rewardsId: number, updateRewardsDto: UpdateRewardsDto): Promise<IRewards> {
+    async updateRewards(rewardsId: string, updateRewardsDto: UpdateRewardsDto): Promise<IRewards> {
         const existingRewards = await this.rewardsModel.findByIdAndUpdate(rewardsId, updateRewardsDto, {new: true});
         if(!existingRewards){
             throw new NotFoundException(`Rewards #${existingRewards} not found`);
@@ -34,7 +34,7 @@ export class RewardsService {
         return rewardsData;
     }
 
-    async getRewards(rewardsId: number): Promise<IRewards> {
+    async getRewards(rewardsId: string): Promise<IRewards> {
         const existingRewards = await this.rewardsModel.findById(rewardsId).exec();
         if(!existingRewards){
             throw new NotFoundException(`Rewards #${rewardsId} not found`);
@@ -42,7 +42,7 @@ export class RewardsService {
         return existingRewards;
     }
 
-    async deleteRewards(rewardsId: number): Promise<IRewards> {
+    async deleteRewards(rewardsId: string): Promise<IRewards> {
         const deletedRewards = await this.rewardsModel.findByIdAndDelete(rewardsId);
         if(!deletedRewards){
             throw new NotFoundException(`Rewards #${rewardsId} not found`);

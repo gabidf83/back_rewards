@@ -28,12 +28,11 @@ export class TasksController {
     }
 
     @Put('/:id')
-    async updateTasks(@Res() response, @Param('id') tasksId: number,
+    async updateTasks(@Res() response, @Param('id') tasksId: string,
         @Body() updateTasksDto: UpdateTasksDto) {
         try {
             const existingTasks = await this.tasksService.updateTasks(tasksId, updateTasksDto);
             return response.status(HttpStatus.OK).json({
-                message: 'Tasks has been successfully updated',
                 existingTasks,
             });
         } catch (err) {
@@ -45,30 +44,41 @@ export class TasksController {
         try {
             const tasksData = await this.tasksService.getAllTasks();
             return response.status(HttpStatus.OK).json({
-                message: 'All tasks data found successfully', tasksData,
+                tasksData,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
         }
     }
     @Get('/:id')
-    async getTasks(@Res() response, @Param('id') tasksId: number) {
+    async getTasks(@Res() response, @Param('id') tasksId: string) {
         try {
             const existingTasks = await
                 this.tasksService.getTasks(tasksId);
             return response.status(HttpStatus.OK).json({
-                message: 'Tasks found successfully', existingTasks,
+                existingTasks,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
         }
     }
+        // Nueva ruta para obtener todas las tareas asociadas a un niño por su _id
+        @Get('children/:childId')
+        async getAllByChildrenId(@Res() response, @Param('childId') childId: string) {
+            try {
+                const tasksData = await this.tasksService.getAllByChildrenId(childId);
+                return response.status(HttpStatus.OK).json({
+                    tasksData,
+                });
+            } catch (err) {
+                return response.status(err.status).json(err.response);
+            }
+        }
     @Delete('/:id')
-    async deleteTasks(@Res() response, @Param('id') tasksId: number) {
+    async deleteTasks(@Res() response, @Param('id') tasksId: string) {
         try {
             const deletedTasks = await this.tasksService.deleteTasks(tasksId);
             return response.status(HttpStatus.OK).json({
-                message: 'Tasks deleted successfully',
                 deletedTasks,
             });
         } catch (err) {

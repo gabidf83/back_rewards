@@ -20,7 +20,7 @@ export class ParentsService {
         return newParents.save();
     }
 
-    async updateParents(parentsId: number, updateParentsDto: UpdateParentsDto):
+    async updateParents(parentsId: string, updateParentsDto: UpdateParentsDto):
     Promise<IParents> {
         const existingParents = await
         this.parentsModel.findByIdAndUpdate(parentsId, updateParentsDto, {
@@ -40,7 +40,7 @@ export class ParentsService {
         return parentsData;
     }
 
-    async getParents(parentsId: number): Promise<IParents> {
+    async getParents(parentsId: string): Promise<IParents> {
         const existingParents = await this.parentsModel.findById(parentsId).exec();
         if(!existingParents) {
             throw new NotFoundException(`Parent #${parentsId} not found`);
@@ -48,7 +48,7 @@ export class ParentsService {
         return existingParents;
     }
 
-    async deleteParents(parentsId: number): Promise<IParents> {
+    async deleteParents(parentsId: string): Promise<IParents> {
         const deleteParents = await this.parentsModel.findByIdAndDelete(parentsId).exec();
         if(!deleteParents) {
             throw new NotFoundException(`Parent #${parentsId} not found`);

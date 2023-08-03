@@ -26,11 +26,11 @@ export class ChildrenController {
     }
 
     @Put('/:id')
-    async updateChildren(@Res() response, @Param('id') childrenId: number, @Body() updateChildrenDto: UpdateChildrenDto){
+    async updateChildren(@Res() response, @Param('id') childrenId: string, @Body() updateChildrenDto: UpdateChildrenDto){
         try{
             const existingChildren = await this.childrenService.updateChildren(childrenId, updateChildrenDto);
             return response.status(HttpStatus.OK).json({
-                message: 'Children has been successfully updated', existingChildren,
+                existingChildren,
             });
         } catch(err) {
             return response.status(err.status).json(err.response);
@@ -42,7 +42,7 @@ export class ChildrenController {
         try{
             const childrenData = await this.childrenService.getAllChildren();
             return response.status(HttpStatus.OK).json({
-                message: 'All children data found successfully', childrenData,
+                childrenData,
             });
         } catch(err) {
             return response.status(err.status).json(err.response);
@@ -50,11 +50,11 @@ export class ChildrenController {
     }
 
     @Get('/:id')
-    async getChildren(@Res() response, @Param('id') childrenId: number){
+    async getChildren(@Res() response, @Param('id') childrenId: string){
         try{
             const existingChildren = await this.childrenService.getChildren(childrenId);
             return response.status(HttpStatus.OK).json({
-                message: 'Children found successfully', existingChildren,
+                existingChildren,
             });
         } catch(err) {
             return response.status(err.status).json(err.response);
@@ -62,11 +62,11 @@ export class ChildrenController {
     }
 
     @Delete('/:id')
-    async deleteChildren(@Res() response, @Param('id') childrenId: number){
+    async deleteChildren(@Res() response, @Param('id') childrenId: string){
         try{
             const deletedChildren = await this.childrenService.deleteChildren(childrenId);
             return response.status(HttpStatus.OK).json({
-                message: 'Children deleted successfully', deletedChildren,
+                deletedChildren,
             });
         } catch(err) {
             return response.status(err.status).json(err.response);
