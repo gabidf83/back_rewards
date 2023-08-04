@@ -62,6 +62,19 @@ export class RewardsController {
         }
     }
 
+    // Nueva ruta para obtener todas las tareas asociadas a un niño por su _id
+    @Get('children/:childId')
+    async getAllByChildrenId(@Res() response, @Param('childId') childId: string) {
+        try {
+            const rewardsData = await this.rewardsService.getAllByChildrenId(childId);
+            return response.status(HttpStatus.OK).json({
+                rewardsData,
+            });
+        } catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Delete('/:id')
     async deleteRewards(@Res() response, @Param('id') rewardsId: string) {
         try {

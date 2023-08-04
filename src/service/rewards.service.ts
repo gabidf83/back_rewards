@@ -34,6 +34,11 @@ export class RewardsService {
         return rewardsData;
     }
 
+    async getAllByChildrenId(childId: string): Promise<IRewards[]> {
+        const rewardsData = await this.rewardsModel.find({ id_children: childId }).exec();
+        return rewardsData;
+      }
+
     async getRewards(rewardsId: string): Promise<IRewards> {
         const existingRewards = await this.rewardsModel.findById(rewardsId).exec();
         if(!existingRewards){
