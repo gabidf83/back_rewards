@@ -48,6 +48,16 @@ export class ParentsService {
         return existingParents;
     }
 
+    async getParentsByUsernameAndPassword(username_parents: string, password_parents: string): Promise<IParents> {
+        const existingParents = await this.parentsModel.findOne({ username_parents, password_parents }).exec();
+        
+        if (!existingParents) {
+            throw new NotFoundException('Parent not found for the given username and password');
+        }
+        
+        return existingParents;
+    }
+
     async deleteParents(parentsId: string): Promise<IParents> {
         const deleteParents = await this.parentsModel.findByIdAndDelete(parentsId).exec();
         if(!deleteParents) {

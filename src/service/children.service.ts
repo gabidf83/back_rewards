@@ -43,6 +43,16 @@ export class ChildrenService {
         return existingChildren;
     }
 
+    async getChildrenByUsernameAndPassword(username_children: string, password_children: string): Promise<IChildren> {
+        const existingChildren = await this.childrenModel.findOne({ username_children, password_children }).exec();
+        
+        if (!existingChildren) {
+            throw new NotFoundException('Children not found for the given username and password');
+        }
+        
+        return existingChildren;
+    }
+
     async deleteChildren(childrenId: string): Promise<IChildren> {
         const deletedChildren = await this.childrenModel.findByIdAndDelete(childrenId);
         if(!deletedChildren){

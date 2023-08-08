@@ -2,9 +2,10 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Put, Res } from '@nestjs/common';
 import { CreateChildrenDto } from 'src/dto/create-children.dto';
 import { UpdateChildrenDto } from 'src/dto/update-children.dto';
+import { IChildren } from 'src/interface/children.interface';
 import { ChildrenService } from 'src/service/children.service';
 
 @Controller('children')
@@ -58,6 +59,24 @@ export class ChildrenController {
             });
         } catch(err) {
             return response.status(err.status).json(err.response);
+        }
+    }
+
+    @Post('login')
+    async getChildrenByUsernameAndPassword(
+        @Body() credentials: { username_children: string; password_children: string },
+    ): Promise<IChildren> {
+        try {
+            const parent = await this.childrenService.getChildrenByUsernameAndPassword(
+                credentials.username_children,
+                credentials.password_children,
+            );
+            return parent;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                throw new NotFoundException('Children not found for the given username and password');
+            }
+            throw error;
         }
     }
 

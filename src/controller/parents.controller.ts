@@ -2,9 +2,10 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { CreateParentsDto } from 'src/dto/create-parents.dto';
 import { UpdateParentsDto } from 'src/dto/update-parents.dto';
+import { IParents } from 'src/interface/parents.interface';
 import { ParentsService } from 'src/service/parents.service';
 
 @Controller('parents')
@@ -62,6 +63,24 @@ export class ParentsController {
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
+        }
+    }
+
+    @Post('login')
+    async getParentsByUsernameAndPassword(
+        @Body() credentials: { username_parents: string; password_parents: string },
+    ): Promise<IParents> {
+        try {
+            const parent = await this.parentsService.getParentsByUsernameAndPassword(
+                credentials.username_parents,
+                credentials.password_parents,
+            );
+            return parent;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                throw new NotFoundException('Parent not found for the given username and password');
+            }
+            throw error;
         }
     }
 
