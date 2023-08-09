@@ -11,11 +11,11 @@ export class CreateRewardsDto {
     @IsNotEmpty()
     readonly id_parents: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     readonly id_children: string;
 
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
     readonly coins_rewards: number;
 

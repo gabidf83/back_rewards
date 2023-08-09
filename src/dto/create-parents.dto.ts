@@ -23,7 +23,7 @@ export class CreateParentsDto {
     @IsNotEmpty()
     readonly surname_parents: string;
 
-    @IsString()
+    @IsDate()
     @IsNotEmpty()
     readonly date_of_birth_parents: Date;
 

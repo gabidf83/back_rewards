@@ -6,11 +6,11 @@ export class CreateTasksDto {
     @IsNotEmpty()
     readonly task_tasks: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     readonly id_parents: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     readonly id_children: string;
 

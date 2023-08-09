@@ -28,7 +28,7 @@ export class CreateChildrenDto {
     @IsNotEmpty()
     readonly surname_children: string;
 
-    @IsString()
+    @IsDate()
     @IsNotEmpty()
     readonly date_of_birth_children: Date;
 
